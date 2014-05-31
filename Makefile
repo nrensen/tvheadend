@@ -36,7 +36,7 @@ CFLAGS  += -Wall -Werror -Wwrite-strings -Wno-deprecated-declarations
 CFLAGS  += -Wmissing-prototypes
 CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
 CFLAGS  += -D_FILE_OFFSET_BITS=64
-CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
+CFLAGS  += -I${ROOTDIR}/src -I${ROOTDIR} -I${BUILDDIR}
 ifeq ($(CONFIG_ANDROID),yes)
 LDFLAGS += -ldl -lm
 else
