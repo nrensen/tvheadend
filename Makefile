@@ -56,7 +56,7 @@ ifeq ($(COMPILER), gcc)
 CFLAGS  += -Wno-stringop-truncation -Wno-stringop-overflow
 endif
 CFLAGS  += -D_FILE_OFFSET_BITS=64
-CFLAGS  += -I${BUILDDIR} -I${ROOTDIR}/src -I${ROOTDIR}
+CFLAGS  += -I${ROOTDIR}/src -I${ROOTDIR} -I${BUILDDIR}
 ifeq ($(CONFIG_ANDROID),yes)
 LDFLAGS += -ldl -lm
 else
