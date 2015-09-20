@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <regex.h>
+#include <pcreposix.h>
 #include <assert.h>
 #include <inttypes.h>
 #include <time.h>

@@ -19,7 +19,7 @@
 #ifndef EPG_H
 #define EPG_H
 
-#include <regex.h>
+#include <pcreposix.h>
 #include "settings.h"
 #include "lang_str.h"
 #include "access.h"

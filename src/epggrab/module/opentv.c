@@ -19,7 +19,7 @@
 #include <string.h>
 #include <assert.h>
 #include <unistd.h>
-#include <regex.h>
+#include <pcreposix.h>
 #include <ctype.h>
 #include "tvheadend.h"
 #include "channels.h"

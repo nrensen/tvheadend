@@ -24,7 +24,7 @@
 #include "prop.h"
 #include "uuid.h"
 
-#include <regex.h>
+#include <pcreposix.h>
 
 struct access;
 typedef struct idnode idnode_t;

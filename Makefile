@@ -37,6 +37,7 @@ CFLAGS  += -Wmissing-prototypes
 CFLAGS  += -fms-extensions -funsigned-char -fno-strict-aliasing
 CFLAGS  += -D_FILE_OFFSET_BITS=64
 CFLAGS  += -I${ROOTDIR}/src -I${ROOTDIR} -I${BUILDDIR}
+LDFLAGS += -lpcreposix
 ifeq ($(CONFIG_ANDROID),yes)
 LDFLAGS += -ldl -lm
 else

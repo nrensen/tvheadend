@@ -22,7 +22,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <regex.h>
+#include <pcreposix.h>
 #include <string.h>
 
 

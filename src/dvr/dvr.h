@@ -19,7 +19,7 @@
 #ifndef DVR_H
 #define DVR_H
 
-#include <regex.h>
+#include <pcreposix.h>
 #include "epg.h"
 #include "channels.h"
 #include "subscriptions.h"
