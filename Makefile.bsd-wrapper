@@ -1,0 +1,14 @@
+configure: build.openbsd/build.h
+	/usr/local/bin/bash configure --disable-linuxdvb --disable-dvbscan --python=python2.7
+
+make:
+	LANGUAGES=en_GB CFLAGS="-I./src -I/usr/local/include" gmake
+
+all: make
+configure: build.openbsd/build.h
+	/usr/local/bin/bash configure --disable-linuxdvb --disable-dvbscan --python=python2.7
+
+make:
+	LANGUAGES=en_GB CFLAGS="-I./src -I/usr/local/include" gmake
+
+all: make

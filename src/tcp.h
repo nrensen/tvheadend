@@ -19,6 +19,11 @@
 #ifndef TCP_H_
 #define TCP_H_
 
+#ifdef __OpenBSD__
+#include <sys/types.h>
+#include <sys/socket.h>
+#endif
+
 #include "htsbuf.h"
 #include "htsmsg.h"
 

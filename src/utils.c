@@ -627,7 +627,11 @@ mpegts_word_count ( const uint8_t *tsb, int len, uint32_t mask )
   int r = 0;
 
 #if BYTE_ORDER == LITTLE_ENDIAN
+#ifdef __OpenBSD__
+  mask = swap32(mask);
+#else
   mask = bswap_32(mask);
+#endif
 #endif
 
   val  = mpegts_word32(tsb) & mask;

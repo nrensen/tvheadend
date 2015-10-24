@@ -18,7 +18,9 @@
 #ifndef __TVH_ENDIAN_H
 #define __TVH_ENDIAN_H
 
+#if !defined(__OpenBSD__)
 #include <byteswap.h>
+#endif
 #if defined(PLATFORM_DARWIN)
 #include <machine/endian.h>
 #elif defined(PLATFORM_FREEBSD)

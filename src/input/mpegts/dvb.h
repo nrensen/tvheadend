@@ -626,7 +626,7 @@ int dvb_mux_conf_str ( dvb_mux_conf_t *conf, char *buf, size_t bufsize );
 
 const char *dvb_sat_position_to_str( int position, char *buf, size_t buflen );
 
-const int dvb_sat_position_from_str( const char *buf );
+int dvb_sat_position_from_str( const char *buf );
 
 #endif /* ENABLE_MPEGTS_DVB */
 
