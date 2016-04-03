@@ -350,28 +350,73 @@ dvr_autorec_cmp(dvr_autorec_entry_t *dae, epg_broadcast_t *e)
       if(!e->title) return 0;
       RB_FOREACH(ls, e->title, link)
         if (!regex_match(&dae->dae_title_regex, ls->str)) break;
+      if (!ls) return 0;
     } else {
-      ls = NULL;
+      size_t len = 0;
       if (e->title)
         RB_FOREACH(ls, e->title, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
-      if (!ls && e->subtitle)
+          len += strlen(ls->str) + 1;
+      if (e->subtitle)
         RB_FOREACH(ls, e->subtitle, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
-      if (!ls && e->summary)
+          len += strlen(ls->str) + 1;
+      if (e->summary)
         RB_FOREACH(ls, e->summary, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
-      if (!ls && e->description)
+          len += strlen(ls->str) + 1;
+      if (e->description)
         RB_FOREACH(ls, e->description, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
-      if (!ls && e->credits_cached)
+          len += strlen(ls->str) + 1;
+      if (e->credits_cached)
         RB_FOREACH(ls, e->credits_cached, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
-      if (!ls && e->keyword_cached)
+          len += strlen(ls->str) + 1;
+      if (e->keyword_cached)
         RB_FOREACH(ls, e->keyword_cached, link)
-          if (!regex_match(&dae->dae_title_regex, ls->str)) break;
+          len += strlen(ls->str) + 1;
+      if (len == 0)
+        return 0;
+      char *ft = malloc(len + 1);
+      len = 0;
+      if (e->title)
+        RB_FOREACH(ls, e->title, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (e->subtitle)
+        RB_FOREACH(ls, e->subtitle, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (e->summary)
+        RB_FOREACH(ls, e->summary, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (e->description)
+        RB_FOREACH(ls, e->description, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (e->credits_cached)
+        RB_FOREACH(ls, e->credits_cached, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (e->keyword_cached)
+        RB_FOREACH(ls, e->keyword_cached, link) {
+          strcpy(ft + len, ls->str);
+          len += strlen(ls->str);
+          ft[len++] = ' ';
+        }
+      if (regex_match(&dae->dae_title_regex, ft)) {
+        free(ft);
+        return 0;
+      }
+      free(ft);
     }
-    if (!ls) return 0;
   }
 
   return 1;

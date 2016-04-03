@@ -2194,25 +2194,66 @@ _eq_add ( epg_query_t *eq, epg_broadcast_t *e )
       return;
   }
   if (fulltext) {
-    if ((s = epg_broadcast_get_title(e, lang)) == NULL ||
-        regex_match(&eq->stitle_re, s)) {
-      if ((s = epg_broadcast_get_subtitle(e, lang)) == NULL ||
-          regex_match(&eq->stitle_re, s)) {
-        if ((s = epg_broadcast_get_summary(e, lang)) == NULL ||
-            regex_match(&eq->stitle_re, s)) {
-          if ((s = epg_broadcast_get_description(e, lang)) == NULL ||
-              regex_match(&eq->stitle_re, s)) {
-            if ((s = epg_broadcast_get_credits_cached(e, lang)) == NULL ||
-                regex_match(&eq->stitle_re, s)) {
-              if ((s = epg_broadcast_get_keyword_cached(e, lang)) == NULL ||
-                  regex_match(&eq->stitle_re, s)) {
-                return;
-              }
-            }
-          }
-        }
-      }
+    const char* s1 = epg_broadcast_get_title(e, lang);
+    const char* s2 = epg_broadcast_get_subtitle(e, lang);
+    const char* s3 = epg_broadcast_get_summary(e, lang);
+    const char* s4 = epg_broadcast_get_description(e, lang);
+    const char* s5 = epg_broadcast_get_credits_cached(e, lang);
+    const char* s6 = epg_broadcast_get_keyword_cached(e, lang);
+    size_t len = 0;
+    if (s1 != NULL)
+      len += strlen(s1) + 1;
+    if (s2 != NULL)
+      len += strlen(s2) + 1;
+    if (s3 != NULL)
+      len += strlen(s3) + 1;
+    if (s4 != NULL)
+      len += strlen(s4) + 1;
+    if (s5 != NULL)
+      len += strlen(s5) + 1;
+    if (s6 != NULL)
+      len += strlen(s6) + 1;
+    if (len == 0)
+      return;
+    char *ft = malloc(len + 1);
+    if (ft == NULL)
+      return;
+    len = 0;
+    if (s1 != NULL) {
+      strcpy(ft + len, s1);
+      len += strlen(s1);
+      ft[len++] = ' ';
     }
+    if (s2 != NULL) {
+      strcpy(ft + len, s2);
+      len += strlen(s2);
+      ft[len++] = ' ';
+    }
+    if (s3 != NULL) {
+      strcpy(ft + len, s3);
+      len += strlen(s3);
+      ft[len++] = ' ';
+    }
+    if (s4 != NULL) {
+      strcpy(ft + len, s4);
+      len += strlen(s4);
+      ft[len++] = ' ';
+    }
+    if (s5 != NULL) {
+      strcpy(ft + len, s5);
+      len += strlen(s5);
+      ft[len++] = ' ';
+    }
+    if (s6 != NULL) {
+      strcpy(ft + len, s6);
+      len += strlen(s6);
+      ft[len++] = ' ';
+    }
+    if (regex_match(&eq->stitle_re, ft)) {
+      free(ft);
+      return;
+    }
+    free(ft);
   }
   if (eq->title.comp != EC_NO || (eq->stitle && !fulltext)) {
     if ((s = epg_broadcast_get_title(e, lang)) == NULL) return;
